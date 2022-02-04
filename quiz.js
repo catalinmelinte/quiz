@@ -1,5 +1,4 @@
 let state = {
-    finished: false,
     currentQuestion: 0,
     questions: []
 }
@@ -9,7 +8,6 @@ const initState = () => {
 }
 
 const render = () => {
-    console.log("rendering", state);
     const question = state.questions[state.currentQuestion];
 
     const choosen = 'answer' in question ? question.answer : -1;
@@ -19,10 +17,8 @@ const render = () => {
 
     const inputs = document.getElementById("answers").getElementsByTagName("input");
     [...inputs].map(input => input.addEventListener("click", event => {
-        console.log("event", event);
         const question = state.questions[state.currentQuestion];
         state.questions[state.currentQuestion] = {...question, answer: parseInt(event.target.value)};
-        console.log("updated state to", state);
         window.setTimeout(() => render(), 100);
     }));
 
